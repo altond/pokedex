@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Alton's App</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+
+    <h1>Alton Test</h1>
+    <form name="myform" onsubmit="myFunction()">
+      Search: 
+      <select id="pokemon" name="pokemon" onchange="myFunction()">
+
+        <option value="bulbasaur">Bulbasaur</option>
+        <option value="ivysaur">Ivysaur</option>
+        <option value="venusaur">Venusaur</option>
+        <option value="charmander">Charmander</option>
+        <option value="charmeleon">Charmleon</option>
+        <option value="charizard">Charizard</option>
+        <option value="squirtle">Squirtle</option>
+        <option value="wartortle">Wartortle</option>
+        <option value="blastoise">Blastoise</option>
+        
+      </select>
+    </form>
+    <div id="root"></div>
+
+    <script src="scripts.js"></script>
+
+  </body>
+</html>
