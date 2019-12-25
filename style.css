@@ -10,7 +10,8 @@
   
   .card {
     margin: 1rem;
-    border: 1px solid gray;
+    border: 3px solid gray;
+    padding: 25px;
   }
   
   @media screen and (min-width: 600px) {

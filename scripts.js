@@ -12,7 +12,6 @@ function myFunction() {
 }
 
 function getPokemonData(name) {
-
   var requestURL = "https://pokeapi.co/api/v2/pokemon/"  + name
   var request = new XMLHttpRequest()
   request.open('GET', requestURL, true)
@@ -34,25 +33,32 @@ function getPokemonData(name) {
     sprite.height="200"
     card.appendChild(sprite)
 
+    const typeheader = document.createElement('h2')
+    typeheader.textContent = "Type"
+    card.appendChild(typeheader)
+    const types = document.createElement('ul')
+    types.textContent = getTypes(data.types)
+    card.appendChild(types)
+
     const abilitiesheader = document.createElement('h2')
     abilitiesheader.textContent = "Abilities"
     card.appendChild(abilitiesheader)
+    var abilitieslist = document.createElement('ul')
+    abilitieslist.textContent = getAbilities(data.abilities)
+    card.appendChild(abilitieslist)
 
-    var temp = document.createElement('ul')
-    var abilities = ""
-    for(var i in data.abilities)   {
-        var abilityname = data.abilities[i].ability.name
-        var res = abilityname.charAt(0).toUpperCase() + abilityname.substring(1, abilityname.length)
-        abilities += res
-        if (i < data.abilities.length-1) abilities += ", "
-    }
-    temp.textContent = abilities
-    card.appendChild(temp)
+    const movesheader = document.createElement('h2')
+    movesheader.textContent = "Moves"
+    card.appendChild(movesheader)
+    var moveslist = document.createElement('ul')
+    moveslist.textContent = getMoves(data.moves)
+    card.appendChild(moveslist)
 
     const statsheader = document.createElement('h2')
     statsheader.textContent = "Stats"
     card.appendChild(statsheader)
-
+    addStats(data.stats, card)
+  
     //while(container.firstChild) {
     //  container.removeChild(container.firstChild);
     //}
@@ -71,4 +77,62 @@ function getPokemonData(name) {
 
 
 request.send()
+}
+
+function getMoves(movesarr) {
+  var moveslistcontent = "";
+  for(var i in movesarr)  {
+      var movename = movesarr[i].move.name
+      var res = movename.charAt(0).toUpperCase() + movename.substring(1, movename.length)
+      moveslistcontent += res
+      if (i < movesarr.length-1) moveslistcontent += ", "
+  }
+  return moveslistcontent;
+}
+
+function getAbilities(abilitiesarr) {
+  var abilitieslistcontent = "";
+  for(var i in abilitiesarr)   {
+      var abilityname = abilitiesarr[i].ability.name
+      var res = abilityname.charAt(0).toUpperCase() + abilityname.substring(1, abilityname.length)
+      abilitieslistcontent += res
+      if (i < abilitiesarr.length-1) abilitieslistcontent += ", "
+  }
+  return abilitieslistcontent;
+}
+
+function addStats(statsarr, card) {
+  const hp = document.createElement('p')
+  hp.textContent = "HP: " + statsarr[5].base_stat
+  card.appendChild(hp)
+
+  const attack = document.createElement('p')
+  attack.textContent = "Attack: " + statsarr[4].base_stat
+  card.appendChild(attack)
+
+  const defense = document.createElement('p')
+  defense.textContent = "Defense: " + statsarr[3].base_stat
+  card.appendChild(defense)
+
+  const specattack = document.createElement('p')
+  specattack.textContent = "Special Attack: " + statsarr[2].base_stat
+  card.appendChild(specattack)
+
+  const specdefense = document.createElement('p')
+  specdefense.textContent = "Special Defense: " + statsarr[1].base_stat
+  card.appendChild(specdefense)
+
+  const speed = document.createElement('p')
+  speed.textContent = "Speed: " + statsarr[0].base_stat
+  card.appendChild(speed)
+}
+
+function getTypes(typesarr) {
+  var res = "\t";
+  for(var i in typesarr) {
+    var type = typesarr[i].type.name
+    res += type.charAt(0).toUpperCase() + type.substring(1, type.length)
+    if (i < typesarr.length-1) res += " / "
+  }
+  return res;
 }
