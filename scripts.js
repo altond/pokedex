@@ -29,8 +29,8 @@ function getPokemonData(name) {
 
     const sprite = document.createElement('img')
     sprite.src = data.sprites.front_default
-    sprite.width="200"
-    sprite.height="200"
+    sprite.width="300"
+    sprite.height="300"
     card.appendChild(sprite)
 
     const typeheader = document.createElement('h2')
@@ -55,7 +55,7 @@ function getPokemonData(name) {
     card.appendChild(moveslist)
 
     const statsheader = document.createElement('h2')
-    statsheader.textContent = "Stats"
+    statsheader.textContent = "Base Stats"
     card.appendChild(statsheader)
     addStats(data.stats, card)
   
@@ -83,11 +83,15 @@ function getMoves(movesarr) {
   var moveslistcontent = "";
   for(var i in movesarr)  {
       var movename = movesarr[i].move.name
-      var res = movename.charAt(0).toUpperCase() + movename.substring(1, movename.length)
-      moveslistcontent += res
+      moveslistcontent += formatMove(movename)
       if (i < movesarr.length-1) moveslistcontent += ", "
   }
   return moveslistcontent;
+}
+
+function formatMove(movename) {
+  res = (movename.replace(/\b\w/g, l => l.toUpperCase())).replace("-", " ")
+  return res
 }
 
 function getAbilities(abilitiesarr) {
