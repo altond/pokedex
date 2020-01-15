@@ -3,6 +3,7 @@ const app = document.getElementById('root')
 const container = document.createElement('div')
 container.setAttribute('class', 'container')
 
+addPokemonNames()
 getPokemonData('bulbasaur') //DEFAULT
 
 function myFunction() {
@@ -22,10 +23,11 @@ function getPokemonData(name) {
     const card = document.createElement('div')
     card.setAttribute('class', 'card')
 
-    const name = document.createElement('h1')
-    var pokemonname = data.name.charAt(0).toUpperCase().concat(data.name.substring(1, data.name.length))
-    name.textContent = pokemonname
-    card.appendChild(name)
+    const nameheader = document.createElement('h1')
+    //SPECIAL CASES: Nidoran f/m, Mr. Mime, Mime Jr., Type: Null, Jangmo-o, Hakamo-o,Kommo-o, Tapu Koko, Tapu Lele, Tapu Bulu, Tapu Fini
+    var pokemonname = name.replace("-"," ")//(data.name.replace(/\b\w/g, l => l.toUpperCase())).replace("-", " ")
+    nameheader.textContent = pokemonname
+    card.appendChild(nameheader)
 
     const sprite = document.createElement('img')
     sprite.src = data.sprites.front_default
@@ -59,9 +61,6 @@ function getPokemonData(name) {
     card.appendChild(statsheader)
     addStats(data.stats, card)
   
-    //while(container.firstChild) {
-    //  container.removeChild(container.firstChild);
-    //}
     if (container.firstChild != null) container.removeChild(container.firstChild);
     container.appendChild(card)
 
@@ -83,14 +82,14 @@ function getMoves(movesarr) {
   var moveslistcontent = "";
   for(var i in movesarr)  {
       var movename = movesarr[i].move.name
-      moveslistcontent += formatMove(movename)
+      moveslistcontent += format(movename)
       if (i < movesarr.length-1) moveslistcontent += ", "
   }
   return moveslistcontent;
 }
 
-function formatMove(movename) {
-  res = (movename.replace(/\b\w/g, l => l.toUpperCase())).replace("-", " ")
+function format(str) {
+  res = (str.replace(/\b\w/g, l => l.toUpperCase())).replace("-", " ")
   return res
 }
 
@@ -98,7 +97,7 @@ function getAbilities(abilitiesarr) {
   var abilitieslistcontent = "";
   for(var i in abilitiesarr)   {
       var abilityname = abilitiesarr[i].ability.name
-      var res = abilityname.charAt(0).toUpperCase() + abilityname.substring(1, abilityname.length)
+      var res = format(abilityname);
       abilitieslistcontent += res
       if (i < abilitiesarr.length-1) abilitieslistcontent += ", "
   }
@@ -139,4 +138,15 @@ function getTypes(typesarr) {
     if (i < typesarr.length-1) res += " / "
   }
   return res;
+}
+
+function addPokemonNames()  {
+  var select = document.getElementById("pokemon")
+  for(var i = 0; i < Pokemon.length; i++) {
+    var option = document.createElement('option');
+    option.value = Pokemon[i].toLowerCase().replace(" ","-").replace(/[.;]/gi, '').replace("♀",'-f').replace("♂",'-m');
+    option.text = i+1 + ": " + Pokemon[i]
+    select.add(option)
+  }
+
 }

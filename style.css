@@ -4,7 +4,7 @@
   }
 
 body {
-    background: url(../pokedex/img/vintage-wallpaper.png) repeat 0 0;
+    background: url(./img/vintage-wallpaper.png) repeat 0 0;
     font-family: 'Cardo', serif;
     color: #ffcc03;
 }
