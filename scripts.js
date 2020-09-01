@@ -4,7 +4,7 @@ const container = document.createElement('div')
 container.setAttribute('class', 'container')
 
 addPokemonNames()
-getPokemonData('bulbasaur') //DEFAULT
+getPokemonData(1) //DEFAULT, 1 = bulbasaur
 
 function myFunction() {
   
@@ -24,9 +24,7 @@ function getPokemonData(name) {
     card.setAttribute('class', 'card')
 
     const nameheader = document.createElement('h1')
-    //SPECIAL CASES: Nidoran f/m, Mr. Mime, Mime Jr., Type: Null, Jangmo-o, Hakamo-o,Kommo-o, Tapu Koko, Tapu Lele, Tapu Bulu, Tapu Fini
-    var pokemonname = name.replace("-"," ")//(data.name.replace(/\b\w/g, l => l.toUpperCase())).replace("-", " ")
-    nameheader.textContent = pokemonname
+    nameheader.textContent = Pokemon[name-1];
     card.appendChild(nameheader)
 
     const sprite = document.createElement('img')
@@ -144,7 +142,8 @@ function addPokemonNames()  {
   var select = document.getElementById("pokemon")
   for(var i = 0; i < Pokemon.length; i++) {
     var option = document.createElement('option');
-    option.value = Pokemon[i].toLowerCase().replace(" ","-").replace(/[.;]/gi, '').replace("♀",'-f').replace("♂",'-m');
+    option.value = i+1;
+    //option.value = Pokemon[i].toLowerCase().replace(" ","-").replace(/[.;]/gi, '').replace("♀",'-f').replace("♂",'-m');
     option.text = i+1 + ": " + Pokemon[i]
     select.add(option)
   }
