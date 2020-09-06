@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Alton's App</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet" />
+    <link href="../style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="topnav">
+        <d class="logo">Alton's Pokedex V1.3</d>
+        <a href="../index.html">Home</a>
+        <a class="active" href="items.html">Items</a>
+        <a href="#comingsoon">Coming Soon</a>
+        <a href="#comingsoon">Coming Soon</a>
+      </div>
+
+    
+    <h1>Items Search</h1>
+    <form name="myform" onsubmit="myFunction()">
+      Search: 
+      <select id="pokemon" name="pokemon" onchange="myFunction()"></select>
+    </form>
+    <div id="root"></div>
+
+    <script type="text/javascript" src="../names.js"></script>
+    <script type="text/javascript" src="../itemscripts.js"></script>
+
+
+  </body>
+</html>

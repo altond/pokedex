@@ -26,6 +26,8 @@ function getPokemonData(name) {
     const nameheader = document.createElement('h1')
     nameheader.textContent = Pokemon[name-1];
     card.appendChild(nameheader)
+//    const div = document.getElementById('card');
+//    div.appendChild(nameheader);
 
     const sprite = document.createElement('img')
     sprite.src = data.sprites.front_default
